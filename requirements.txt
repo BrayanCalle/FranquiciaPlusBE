@@ -1,0 +1,10 @@
+pip install django-environ
+pip install psycopg2
+python -m pip install Pillow
+pip install django-rest-framework
+# pip install django-material-admin
+
+# Frontend
+npm install -g @vue/cli
+npm i -g @vue/cli-init
+npm install bootstrap-vue
