@@ -28,13 +28,14 @@ class Directorio(models.Model):
         return self.nombre
 
 class Marca(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
     nombre = models.CharField(max_length=30, unique=True, verbose_name="Nombre")
     precio = models.IntegerField(verbose_name="Precio", default=0)
     descripcion = models.TextField(max_length=150 ,verbose_name="Descripción")
     imagenmarca = models.ImageField(upload_to='photos/franquicia/marca', verbose_name="Imagen Marca")
     imagenlocal = models.ImageField(upload_to='photos/franquicia/local', verbose_name="Imagen Local")
     imagenlogo = models.ImageField(upload_to='photos/franquicia/logo', verbose_name="Imagen Logo")
-    categoria = models.ManyToManyField(Categoria, related_name="marcas")
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name="marcas")
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE, related_name="marcas", null=True, blank=True, help_text="Recuerde que solo puede agregar 9 marcas en Promoción y solo 6 marcas en Nuevo")
     ubicacion = models.ManyToManyField(Ubicacion, related_name="marcas")
     directorio = models.ManyToManyField(Directorio, related_name="marcas", blank=True)

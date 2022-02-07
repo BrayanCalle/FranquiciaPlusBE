@@ -1,10 +1,22 @@
+# backend
 pip install django-environ
 pip install psycopg2
 python -m pip install Pillow
 pip install django-rest-framework
+pip install django-filter
+pip install django-cors-headers
 # pip install django-material-admin
 
 # Frontend
 npm install -g @vue/cli
 npm i -g @vue/cli-init
 npm install bootstrap-vue
+npm install axios
+npm install aos –save
+# El cli de vue da la opcion de agregar eslint cuando se crea el proyecto
+vue add @vue/cli-plugin-eslint
+
+# Font awesome
+npm i --save @fortawesome/fontawesome-svg-core
+npm i --save @fortawesome/free-solid-svg-icons
+npm i --save @fortawesome/vue-fontawesome
