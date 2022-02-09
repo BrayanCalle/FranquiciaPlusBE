@@ -15,6 +15,7 @@ npm install axios
 npm install aos –save
 # El cli de vue da la opcion de agregar eslint cuando se crea el proyecto
 vue add @vue/cli-plugin-eslint
+npm install numeral
 
 # Font awesome
 npm i --save @fortawesome/fontawesome-svg-core
