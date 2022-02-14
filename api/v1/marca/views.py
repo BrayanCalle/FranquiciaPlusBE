@@ -11,12 +11,12 @@ class MarcaViewSet(viewsets.ModelViewSet):
     filter_backends = [DjangoFilterBackend,OrderingFilter, SearchFilter]
     ordering_fields = ["created_at", "nombre", "precio"]
     ordering = ["-created_at"]
-    search_fields = ["nombre", "categoria__id", "precio"]
+    search_fields = ["nombre", "categoria__nombre", "precio"]
     filterset_fields = {
         'precio': ['gte','lte'],
-        'categoria': ['exact'],
+        'categoria__nombre': ['exact'],
         'estado': ['exact'],
-        'ubicacion': ['exact'],
+        'ubicacion__nombre': ['exact'],
         'directorio': ['exact'],
     }
     queryset = Marca.objects.all()

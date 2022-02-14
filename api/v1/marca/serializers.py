@@ -12,6 +12,7 @@ class MarcaSerializer(serializers.ModelSerializer):
             "imagenmarca", "imagenlocal", "imagenlogo",
             "categoria","estado","ubicacion","directorio"
         ] + read_only_fields
+        depth=1
 
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
