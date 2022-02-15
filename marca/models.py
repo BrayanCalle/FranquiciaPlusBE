@@ -1,3 +1,4 @@
+from random import choice
 from django.db import models
 import os
 
@@ -5,6 +6,7 @@ import os
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=50, unique=True, verbose_name="Nombre")
+    iconofp = models.CharField(max_length=10, verbose_name="Icono de la Categoría", null = True)
 
     def __str__(self):
         return self.nombre
@@ -27,10 +29,31 @@ class Directorio(models.Model):
     def __str__(self):
         return self.nombre
 
+class Inversion(models.Model):
+    nombre = models.CharField(max_length=30, unique=True, verbose_name="Rango de Inversión")
+
+    def __str__(self):
+        return self.nombre
+
+# class Estrellas(models.Model):
+#     nombre = models.IntegerField(unique=True, verbose_name="Número de Estrellas")
+
+#     def __str__(self):
+#         return self.nombre
+
+class Prioridad(models.Model):
+    nombre = models.CharField(max_length=20, unique=True, verbose_name="Nombre de la Prioridad")
+    valor = models.IntegerField(unique=True, null=True, verbose_name="Prioridad en orden de franquicias")
+
+    def __str__(self):
+        return self.nombre
+
+
 class Marca(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     nombre = models.CharField(max_length=30, unique=True, verbose_name="Nombre")
     precio = models.IntegerField(verbose_name="Precio", default=0)
+    inversion = models.ForeignKey(Inversion, on_delete=models.CASCADE, verbose_name="Rango de Inversión")
     descripcion = models.TextField(max_length=150 ,verbose_name="Descripción")
     imagenmarca = models.ImageField(upload_to='photos/franquicia/marca', verbose_name="Imagen Marca")
     imagenlocal = models.ImageField(upload_to='photos/franquicia/local', verbose_name="Imagen Local")
@@ -39,6 +62,16 @@ class Marca(models.Model):
     estado = models.ForeignKey(Estado, on_delete=models.CASCADE, related_name="marcas", null=True, blank=True, help_text="Recuerde que solo puede agregar 9 marcas en Promoción y solo 6 marcas en Nuevo")
     ubicacion = models.ManyToManyField(Ubicacion, related_name="marcas")
     directorio = models.ManyToManyField(Directorio, related_name="marcas", blank=True)
+    # estrellas = models.ForeignKey(Estrellas, on_delete=models.CASCADE, verbose_name="Número de estrellas", null=True, blank=True)
+    numeroestrellas = (
+        ('1','Una'),
+        ('2','Dos'),
+        ('3','Tres'),
+        ('4','Cuatro'),
+        ('5','Cinco'),
+    )
+    estrellas = models.CharField(choices=numeroestrellas, max_length=5, help_text="Número de estrellas que se le asigna a la marca")
+    prioridad = models.ForeignKey(Prioridad, on_delete=models.CASCADE, verbose_name="Prioridad en el orden de franquicias", blank=True, null=True)
 
     def remove_on_image_update(self):
         try:

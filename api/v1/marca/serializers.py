@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from marca.models import Marca, Categoria, Ubicacion
+from marca.models import Inversion, Marca, Categoria, Ubicacion
 
 class MarcaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -10,7 +10,8 @@ class MarcaSerializer(serializers.ModelSerializer):
         fields = [
             "created_at","nombre", "precio", "descripcion",
             "imagenmarca", "imagenlocal", "imagenlogo",
-            "categoria","estado","ubicacion","directorio"
+            "categoria","estado","ubicacion","directorio",
+            "inversion","estrellas","prioridad"
         ] + read_only_fields
         depth=1
 
@@ -27,6 +28,16 @@ class CategoriaSerializer(serializers.ModelSerializer):
 class UbicacionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ubicacion
+        read_only_fields = [
+            "id",
+        ]
+        fields = [
+            "nombre",
+        ] + read_only_fields
+
+class InversionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Inversion
         read_only_fields = [
             "id",
         ]
