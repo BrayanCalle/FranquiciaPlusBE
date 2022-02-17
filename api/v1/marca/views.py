@@ -18,7 +18,7 @@ class MarcaViewSet(viewsets.ModelViewSet):
         'estado': ['exact'],
         'ubicacion__nombre': ['exact'],
         'directorio': ['exact'],
-        'inversion__nombre': ['exact'],
+        'inversion': ['exact'],
     }
     queryset = Marca.objects.all()
 
